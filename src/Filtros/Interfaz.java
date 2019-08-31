@@ -1,4 +1,4 @@
-package practica2;
+package Filtros;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
