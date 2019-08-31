@@ -70,8 +70,13 @@ public class Practica2 extends javax.swing.JFrame {
         tonosGris = new javax.swing.JMenu();
         grisesMitad = new javax.swing.JMenuItem();
         grisesTodo = new javax.swing.JMenuItem();
+        pixelear = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        anterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/previous.png"))); // NOI18N
+
+        siguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next.png"))); // NOI18N
 
         eliminar.setText("Eliminar");
 
@@ -108,6 +113,7 @@ public class Practica2 extends javax.swing.JFrame {
         jMenuBar1.add(archivo);
 
         filtros.setText("Filtros");
+        filtros.setEnabled(false);
 
         tonosGris.setText("Tonos de Gris");
 
@@ -124,6 +130,14 @@ public class Practica2 extends javax.swing.JFrame {
 
         filtros.add(tonosGris);
 
+        pixelear.setText("Pixelear");
+        pixelear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pixelearActionPerformed(evt);
+            }
+        });
+        filtros.add(pixelear);
+
         jMenuBar1.add(filtros);
 
         setJMenuBar(jMenuBar1);
@@ -133,27 +147,27 @@ public class Practica2 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(anterior)
-                        .addGap(39, 39, 39)
-                        .addComponent(eliminar)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(siguiente))
-                    .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(siguiente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(siguiente, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(anterior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -240,6 +254,13 @@ public class Practica2 extends javax.swing.JFrame {
         imagen.setIcon(new ImageIcon(imagenOriginal.getScaledInstance(imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
     }//GEN-LAST:event_grisesTodoActionPerformed
 
+    private void pixelearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pixelearActionPerformed
+        try {
+            int tam = Integer.parseInt(JOptionPane.showInputDialog(this, "Tamaño de los pixeles:"));
+            
+        } catch(Exception e){}
+    }//GEN-LAST:event_pixelearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,6 +307,7 @@ public class Practica2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem guardar;
     private javax.swing.JLabel imagen;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem pixelear;
     private javax.swing.JMenuItem salir;
     private javax.swing.JButton siguiente;
     private javax.swing.JMenu tonosGris;
