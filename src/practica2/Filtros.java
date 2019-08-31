@@ -4,9 +4,8 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 /**
- * En esta clase implementaran los metodos para cada filtro.
- * 
- * @author usr
+ * Métodos para cada filtro.
+ * @author Méndez Oliveros Victor Hugo
  */
 public class Filtros {
     
@@ -261,7 +260,6 @@ public class Filtros {
      * @param imagen La imagen a aplicarle el negativo.
      * @return Imagen en negativo.
      */
-    
     public BufferedImage filtroNegativo(BufferedImage imagen){
 
         BufferedImage nueva = new BufferedImage(

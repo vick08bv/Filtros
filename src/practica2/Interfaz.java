@@ -13,25 +13,45 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
- * @author usr
+ * Interfaz.
+ * @author Méndez Oliveros Victor Hugo
  */
 public class Interfaz extends javax.swing.JFrame {
     
-    // Lista donde iremos guardando el procesamiento de las imagenes.
+    /**
+     *Lista donde iremos guardando el procesamiento de las imagenes.
+     */
     private List<BufferedImage> imagenes;
-    // Nos permite saber en que indice de la lista estamos.
-    private int index;
-    // Aqui se guardara la imagen.
+    
+    /**
+     * Nos permite saber en que indice de la lista estamos.
+     */
+    private int indice;
+    
+    /**
+     * Aqui se guardara la imagen.
+     */
     private BufferedImage imagenActual;
-    // El nombre de la imagen.
+    
+    /**
+     * El nombre de la imagen.
+     */
     private String nombre;
-    // El formato de la imagen.
+    
+    /**
+     * El formato de la imagen.
+     */
     private String formato;
-    // Registra si hay cambios sin guardar.
+    
+    /**
+     * Registra si hay cambios sin guardar.
+     */
     private boolean cambios;
-    // Objeto que nos permitira aplicar los filtros.
-    private Filtros f;
+    
+    /**
+     * Objeto que nos permitira aplicar los filtros.
+     */
+    private Filtros filtro;
 
     /**
      * Creates new form Practica2
@@ -39,7 +59,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         // Objeto de tipo Filtros.
-        f = new Filtros();
+        filtro = new Filtros();
         // Titulo de la ventana.
         setTitle("MiniPhotoShop");
         // Colocamos al centro de la pantalla.
@@ -334,13 +354,11 @@ public class Interfaz extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         System.out.println("Adios");
         // Termina la ejecucion del programa.
         System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
-
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
         // Objeto que nos permitira abrir una ventana de seleccion.
         JFileChooser chooser = new JFileChooser();
@@ -368,7 +386,7 @@ public class Interfaz extends javax.swing.JFrame {
                     // Agregamos la imagen a la lista.
                     imagenes.add(imagenActual);
                     // Inicializamos el indice en la posicion 0.
-                    index = 0;
+                    indice = 0;
                     // Hay cambios sin guardar.
                     cambios = true;
                     // Colocamos la imagen en el label de la interfaz.
@@ -386,7 +404,6 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_abrirActionPerformed
-
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
 
         // Objeto que nos permitira desplejar los directorios.
@@ -399,7 +416,7 @@ public class Interfaz extends javax.swing.JFrame {
         if(chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
             // Guardamos la imagen.
             try {
-                ImageIO.write(imagenes.get(index), formato, 
+                ImageIO.write(imagenes.get(indice), formato, 
                 new File(chooser.getSelectedFile().getAbsolutePath()));
                 // Ya no hay cambios sin guardar.
                 cambios = false;
@@ -409,75 +426,69 @@ public class Interfaz extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_guardarActionPerformed
-
     private void grisesTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grisesTodoActionPerformed
         
         // Guardarmos la imagen editada en el buferredImage.
-        imagenActual = f.tonosDeGris(imagenes.get(index));
+        imagenActual = filtro.tonosDeGris(imagenes.get(indice));
         // Aumentamos los indices.
-        index++;
+        indice++;
         // Agregamos la nueva imagen a la lista.
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
         // Colocamos la imagen en la interfaz.
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_grisesTodoActionPerformed
-
     private void pixelearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pixelearActionPerformed
         try {
             int tam = Integer.parseInt(JOptionPane.showInputDialog(this, "Tamaño de los pixeles:"));
             
         } catch(Exception e){}
     }//GEN-LAST:event_pixelearActionPerformed
-
     private void filtroRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroRojoActionPerformed
 
-        imagenActual = f.filtroColor(imagenes.get(index), "rojo");
+        imagenActual = filtro.filtroColor(imagenes.get(indice), "rojo");
         
-        index++;
+        indice++;
 
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_filtroRojoActionPerformed
-
     private void filtroVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroVerdeActionPerformed
         
-        imagenActual = f.filtroColor(imagenes.get(index), "verde");
+        imagenActual = filtro.filtroColor(imagenes.get(indice), "verde");
   
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_filtroVerdeActionPerformed
-
     private void filtroAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroAzulActionPerformed
         
-        imagenActual = f.filtroColor(imagenes.get(index), "azul");
+        imagenActual = filtro.filtroColor(imagenes.get(indice), "azul");
 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_filtroAzulActionPerformed
-
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
    
-        if(index > 0){
+        if(indice > 0){
         
-            index--;
+            indice--;
 
-            imagen.setIcon(new ImageIcon(imagenes.get(index).getScaledInstance(
+            imagen.setIcon(new ImageIcon(imagenes.get(indice).getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
 
         }
@@ -486,14 +497,13 @@ public class Interfaz extends javax.swing.JFrame {
  
         
     }//GEN-LAST:event_anteriorActionPerformed
-
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
         
-        if(index < imagenes.size()-1){
+        if(indice < imagenes.size()-1){
 
-            index++;
+            indice++;
 
-            imagen.setIcon(new ImageIcon(imagenes.get(index).getScaledInstance(
+            imagen.setIcon(new ImageIcon(imagenes.get(indice).getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
         }
@@ -501,7 +511,6 @@ public class Interfaz extends javax.swing.JFrame {
         return;
         
     }//GEN-LAST:event_siguienteActionPerformed
-
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         
         if(imagenes.size() == 1){
@@ -515,156 +524,145 @@ public class Interfaz extends javax.swing.JFrame {
         
         } else {
         
-                imagenes.remove(index);
+                imagenes.remove(indice);
                 
-                if(index == imagenes.size()){
-                    index--;
+                if(indice == imagenes.size()){
+                    indice--;
                 }
                 
-                imagen.setIcon(new ImageIcon(imagenes.get(index).getScaledInstance(
+                imagen.setIcon(new ImageIcon(imagenes.get(indice).getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
             
         }
         
     }//GEN-LAST:event_eliminarActionPerformed
-
     private void superiorGrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_superiorGrisActionPerformed
         
-        imagenActual = f.tonosDeGrisMitad(imagenes.get(index), "sup");
+        imagenActual = filtro.tonosDeGrisMitad(imagenes.get(indice), "sup");
                     
-        index++;
+        indice++;
 
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_superiorGrisActionPerformed
-
     private void inferiorGrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inferiorGrisActionPerformed
         
-        imagenActual = f.tonosDeGrisMitad(imagenes.get(index), "inf");
+        imagenActual = filtro.tonosDeGrisMitad(imagenes.get(indice), "inf");
         
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
         
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_inferiorGrisActionPerformed
-
     private void izquierdaGrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izquierdaGrisActionPerformed
         
-        imagenActual = f.tonosDeGrisMitad(imagenes.get(index), "izq");
+        imagenActual = filtro.tonosDeGrisMitad(imagenes.get(indice), "izq");
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_izquierdaGrisActionPerformed
-
     private void derechaGrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derechaGrisActionPerformed
         
-        imagenActual = f.tonosDeGrisMitad(imagenes.get(index), "der");
+        imagenActual = filtro.tonosDeGrisMitad(imagenes.get(indice), "der");
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_derechaGrisActionPerformed
-
     private void aumentarBrilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarBrilloActionPerformed
         
-        imagenActual = f.aumentarBrillo(imagenes.get(index));
+        imagenActual = filtro.aumentarBrillo(imagenes.get(indice));
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_aumentarBrilloActionPerformed
-
     private void negativoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_negativoActionPerformed
         
-        imagenActual = f.filtroNegativo(imagenes.get(index));
+        imagenActual = filtro.filtroNegativo(imagenes.get(indice));
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_negativoActionPerformed
-
     private void reflejoHorizontalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reflejoHorizontalActionPerformed
         
-        imagenActual = f.reflejarImagen(imagenes.get(index), "horizontal");
+        imagenActual = filtro.reflejarImagen(imagenes.get(indice), "horizontal");
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_reflejoHorizontalActionPerformed
-
     private void reflejoVerticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reflejoVerticalActionPerformed
         
-        imagenActual = f.reflejarImagen(imagenes.get(index), "vertical");
+        imagenActual = filtro.reflejarImagen(imagenes.get(indice), "vertical");
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_reflejoVerticalActionPerformed
-
     private void reflejoDiagonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reflejoDiagonalActionPerformed
         
-        imagenActual = f.reflejarImagen(imagenes.get(index), "diagonal");
+        imagenActual = filtro.reflejarImagen(imagenes.get(indice), "diagonal");
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_reflejoDiagonalActionPerformed
-
     private void filtroSepiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroSepiaActionPerformed
         
-        imagenActual = f.filtroSepia(imagenes.get(index));
+        imagenActual = filtro.filtroSepia(imagenes.get(indice));
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
         
     }//GEN-LAST:event_filtroSepiaActionPerformed
-
     private void luzNegraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luzNegraActionPerformed
         
-        imagenActual = f.luzNegra(imagenes.get(index));
+        imagenActual = filtro.luzNegra(imagenes.get(indice));
                 
-        index++;
+        indice++;
         
-        imagenes.add(index, imagenActual);
+        imagenes.add(indice, imagenActual);
 
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
@@ -740,4 +738,5 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem superiorGris;
     private javax.swing.JMenu tonosGris;
     // End of variables declaration//GEN-END:variables
+
 }
