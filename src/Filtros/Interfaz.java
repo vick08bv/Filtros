@@ -151,6 +151,7 @@ public class Interfaz extends javax.swing.JFrame {
         deslizador.setPaintTicks(true);
         deslizador.setSnapToTicks(true);
         deslizador.setToolTipText("");
+        deslizador.setEnabled(false);
 
         archivo.setText("Archivo");
 
@@ -398,15 +399,14 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(deslizador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(eliminar)))
+                        .addComponent(eliminar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15))
         );
 
@@ -456,6 +456,7 @@ public class Interfaz extends javax.swing.JFrame {
                     anterior.setEnabled(true);
                     siguiente.setEnabled(true);
                     eliminar.setEnabled(true);
+                    deslizador.setEnabled(true);
                 }
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, e);
@@ -580,6 +581,7 @@ public class Interfaz extends javax.swing.JFrame {
             anterior.setEnabled(false);
             siguiente.setEnabled(false);
             eliminar.setEnabled(false);
+            deslizador.setEnabled(false);
             imagen.setIcon(null);
         
         } else {
