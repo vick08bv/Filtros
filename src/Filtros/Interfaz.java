@@ -499,15 +499,15 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_grisesTodoActionPerformed
     private void pixelearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pixelearActionPerformed
 
-    imagenActual = filtro.pixelearImagen(
-        imagenes.get(indice), deslizador.getValue());
+        imagenActual = filtro.pixelearImagen(
+            imagenes.get(indice), deslizador.getValue());
 
-    indice++;
+        indice++;
 
-    imagenes.add(indice, imagenActual);
+        imagenes.add(indice, imagenActual);
 
-    imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
-                    imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
+        imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
+                        imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
 
     }//GEN-LAST:event_pixelearActionPerformed
     private void filtroRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroRojoActionPerformed
@@ -557,10 +557,7 @@ public class Interfaz extends javax.swing.JFrame {
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
 
         }
-        
-        return;
- 
-        
+
     }//GEN-LAST:event_anteriorActionPerformed
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
         
@@ -570,10 +567,8 @@ public class Interfaz extends javax.swing.JFrame {
 
             imagen.setIcon(new ImageIcon(imagenes.get(indice).getScaledInstance(
                           imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
-        
+
         }
-        
-        return;
         
     }//GEN-LAST:event_siguienteActionPerformed
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
