@@ -413,9 +413,18 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        System.out.println("Adios");
-        // Termina la ejecucion del programa.
+        
+        if(cambios){
+            
+            int opcion = JOptionPane.showConfirmDialog(null, "Hay cambios sin guardar ¿Salir?", 
+                          "Salir", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                
+            if(opcion == 0){System.exit(0);}else{return;}
+            
+        }
+        
         System.exit(0);
+        
     }//GEN-LAST:event_salirActionPerformed
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
         // Objeto que nos permitira abrir una ventana de seleccion.
@@ -459,7 +468,8 @@ public class Interfaz extends javax.swing.JFrame {
                     deslizador.setEnabled(true);
                 }
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null, e);
+                JOptionPane.showConfirmDialog(null, "No se pudo abrir la imagen", 
+                   "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_abrirActionPerformed
@@ -480,7 +490,8 @@ public class Interfaz extends javax.swing.JFrame {
                 // Ya no hay cambios sin guardar.
                 cambios = false;
             } catch (IOException ex) {
-                System.out.println("Failed to save image!");
+                JOptionPane.showConfirmDialog(null, "No se pudo guardar la imagen", 
+                   "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
             }
         }
         
