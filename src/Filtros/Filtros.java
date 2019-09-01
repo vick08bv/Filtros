@@ -53,7 +53,7 @@ public class Filtros {
     /**
      * Aplica el filtro tonos de gris en cierta parte de una imagen.
      * @param imagen La imagen a la que le aplicaremos el filtro.
-     * @param opcion Parte en que aplicará el filtro.
+     * @param opcion Parte en que se aplicará el filtro.
      * @param porcentaje Porcentaje de aplicación del filtro.
      * @return La nueva imagen con el filtro aplicado.
      */

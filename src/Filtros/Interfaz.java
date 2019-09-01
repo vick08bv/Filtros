@@ -61,7 +61,7 @@ public class Interfaz extends javax.swing.JFrame {
         // Objeto de tipo Filtros.
         filtro = new Filtros();
         // Titulo de la ventana.
-        setTitle("MiniPhotoShop");
+        setTitle("Mini Photoshop");
         // Colocamos al centro de la pantalla.
         setLocationRelativeTo(null);
         // Evitamos que se maximice la ventana.
@@ -243,7 +243,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         mitadGris.setText("Parcial");
 
-        superiorGris.setText("Superior");
+        superiorGris.setText("Superior %");
         superiorGris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 superiorGrisActionPerformed(evt);
@@ -251,7 +251,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         mitadGris.add(superiorGris);
 
-        inferiorGris.setText("Inferior");
+        inferiorGris.setText("Inferior %");
         inferiorGris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inferiorGrisActionPerformed(evt);
@@ -259,7 +259,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         mitadGris.add(inferiorGris);
 
-        izquierdaGris.setText("Izquierda");
+        izquierdaGris.setText("Izquierda %");
         izquierdaGris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izquierdaGrisActionPerformed(evt);
@@ -267,7 +267,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         mitadGris.add(izquierdaGris);
 
-        derechaGris.setText("Derecha");
+        derechaGris.setText("Derecha %");
         derechaGris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 derechaGrisActionPerformed(evt);
@@ -289,7 +289,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         brillo.setText("Brillo");
 
-        aumentarBrillo.setText("Aumentar brillo");
+        aumentarBrillo.setText("Aumentar brillo %");
         aumentarBrillo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aumentarBrilloActionPerformed(evt);
@@ -297,7 +297,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         brillo.add(aumentarBrillo);
 
-        disminuirBrillo.setText("Disminuir brillo");
+        disminuirBrillo.setText("Disminuir brillo %");
         disminuirBrillo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 disminuirBrilloActionPerformed(evt);
@@ -335,7 +335,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         filtros.add(reflejo);
 
-        pixelear.setText("Pixelear");
+        pixelear.setText("Pixelear %");
         pixelear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pixelearActionPerformed(evt);
@@ -371,24 +371,25 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(deslizador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)))
-                .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(deslizador, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)))
+                        .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,7 +404,6 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(deslizador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(eliminar)))

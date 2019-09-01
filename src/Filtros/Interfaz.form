@@ -118,7 +118,7 @@
                   <SubComponents>
                     <MenuItem class="javax.swing.JMenuItem" name="superiorGris">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Superior"/>
+                        <Property name="text" type="java.lang.String" value="Superior %"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="superiorGrisActionPerformed"/>
@@ -126,7 +126,7 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="inferiorGris">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Inferior"/>
+                        <Property name="text" type="java.lang.String" value="Inferior %"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inferiorGrisActionPerformed"/>
@@ -134,7 +134,7 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="izquierdaGris">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Izquierda"/>
+                        <Property name="text" type="java.lang.String" value="Izquierda %"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="izquierdaGrisActionPerformed"/>
@@ -142,7 +142,7 @@
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="derechaGris">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Derecha"/>
+                        <Property name="text" type="java.lang.String" value="Derecha %"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="derechaGrisActionPerformed"/>
@@ -167,7 +167,7 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="aumentarBrillo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Aumentar brillo"/>
+                    <Property name="text" type="java.lang.String" value="Aumentar brillo %"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aumentarBrilloActionPerformed"/>
@@ -175,7 +175,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="disminuirBrillo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Disminuir brillo"/>
+                    <Property name="text" type="java.lang.String" value="Disminuir brillo %"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="disminuirBrilloActionPerformed"/>
@@ -216,7 +216,7 @@
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="pixelear">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pixelear"/>
+                <Property name="text" type="java.lang.String" value="Pixelear %"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pixelearActionPerformed"/>
@@ -279,28 +279,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="anterior" min="-2" pref="50" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="deslizador" min="-2" pref="200" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="anterior" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="deslizador" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <Component id="eliminar" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="siguiente" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="eliminar" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="imagen" min="-2" pref="400" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="siguiente" min="-2" pref="50" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Component id="imagen" min="-2" pref="400" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -311,18 +314,16 @@
               <Component id="imagen" min="-2" pref="435" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                      <Component id="anterior" min="-2" pref="50" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Component id="siguiente" min="-2" pref="50" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="deslizador" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                       <Component id="eliminar" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="anterior" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="siguiente" min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
