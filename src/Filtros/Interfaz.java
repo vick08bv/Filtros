@@ -81,7 +81,7 @@ public class Interfaz extends javax.swing.JFrame {
         anterior = new javax.swing.JButton();
         siguiente = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        Menu = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         abrir = new javax.swing.JMenuItem();
         guardar = new javax.swing.JMenuItem();
@@ -103,11 +103,15 @@ public class Interfaz extends javax.swing.JFrame {
         grisesTodo = new javax.swing.JMenuItem();
         brillo = new javax.swing.JMenu();
         aumentarBrillo = new javax.swing.JMenuItem();
+        disminuirBrillo = new javax.swing.JMenuItem();
         reflejo = new javax.swing.JMenu();
         reflejoHorizontal = new javax.swing.JMenuItem();
         reflejoVertical = new javax.swing.JMenuItem();
         reflejoDiagonal = new javax.swing.JMenuItem();
         pixelear = new javax.swing.JMenuItem();
+        esteganografia = new javax.swing.JMenu();
+        ocultarCodigo = new javax.swing.JMenuItem();
+        mostrarCodigo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,7 +169,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         archivo.add(salir);
 
-        jMenuBar1.add(archivo);
+        Menu.add(archivo);
 
         filtros.setText("Filtros");
         filtros.setEnabled(false);
@@ -280,6 +284,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
         brillo.add(aumentarBrillo);
 
+        disminuirBrillo.setText("Disminuir brillo");
+        disminuirBrillo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disminuirBrilloActionPerformed(evt);
+            }
+        });
+        brillo.add(disminuirBrillo);
+
         filtros.add(brillo);
 
         reflejo.setText("Reflejo");
@@ -318,9 +330,29 @@ public class Interfaz extends javax.swing.JFrame {
         });
         filtros.add(pixelear);
 
-        jMenuBar1.add(filtros);
+        esteganografia.setText("Esteganografía");
 
-        setJMenuBar(jMenuBar1);
+        ocultarCodigo.setText("Ocultar código");
+        ocultarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocultarCodigoActionPerformed(evt);
+            }
+        });
+        esteganografia.add(ocultarCodigo);
+
+        mostrarCodigo.setText("Mostrar código");
+        mostrarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarCodigoActionPerformed(evt);
+            }
+        });
+        esteganografia.add(mostrarCodigo);
+
+        filtros.add(esteganografia);
+
+        Menu.add(filtros);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -440,10 +472,35 @@ public class Interfaz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_grisesTodoActionPerformed
     private void pixelearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pixelearActionPerformed
+
         try {
-            int tam = Integer.parseInt(JOptionPane.showInputDialog(this, "Tamaño de los pixeles:"));
-            
-        } catch(Exception e){}
+
+            int porcentaje = Integer.parseInt(
+                  JOptionPane.showInputDialog(
+                        this, "Porcentaje: "));
+
+            if((porcentaje > 0) && (porcentaje <= 100)){
+
+                imagenActual = filtro.pixelearImagen(
+                    imagenes.get(indice), porcentaje);
+
+                indice++;
+
+                imagenes.add(indice, imagenActual);
+
+                imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
+                                imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
+
+            } else {
+
+                JOptionPane.showMessageDialog(null, 
+                           "Porcentaje no valido");
+
+            }
+
+        } catch(Exception e){JOptionPane.showInputDialog(
+                                   "Porcentaje no valido");}
+        
     }//GEN-LAST:event_pixelearActionPerformed
     private void filtroRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroRojoActionPerformed
 
@@ -669,6 +726,43 @@ public class Interfaz extends javax.swing.JFrame {
         
     }//GEN-LAST:event_luzNegraActionPerformed
 
+    private void mostrarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCodigoActionPerformed
+        
+        String cadena = filtro.mostrarCodigo(imagenes.get(indice));
+        
+        JOptionPane.showMessageDialog(null, cadena, "Código", 
+                                  JOptionPane.PLAIN_MESSAGE);
+        
+    }//GEN-LAST:event_mostrarCodigoActionPerformed
+    private void ocultarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocultarCodigoActionPerformed
+        
+        String codigo = JOptionPane.showInputDialog(null, null , 
+                "Introducir Código", JOptionPane.PLAIN_MESSAGE);
+                
+        imagenActual = filtro.ocultarCodigo(imagenes.get(indice), codigo);
+                
+        indice++;
+        
+        imagenes.add(indice, imagenActual);
+
+        imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
+                          imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
+        
+    }//GEN-LAST:event_ocultarCodigoActionPerformed
+
+    private void disminuirBrilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disminuirBrilloActionPerformed
+                
+        imagenActual = filtro.disminuirBrillo(imagenes.get(indice));
+                
+        indice++;
+        
+        imagenes.add(indice, imagenActual);
+
+        imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
+                          imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
+        
+    }//GEN-LAST:event_disminuirBrilloActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -706,13 +800,16 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar Menu;
     private javax.swing.JMenuItem abrir;
     private javax.swing.JButton anterior;
     private javax.swing.JMenu archivo;
     private javax.swing.JMenuItem aumentarBrillo;
     private javax.swing.JMenu brillo;
     private javax.swing.JMenuItem derechaGris;
+    private javax.swing.JMenuItem disminuirBrillo;
     private javax.swing.JButton eliminar;
+    private javax.swing.JMenu esteganografia;
     private javax.swing.JMenuItem filtroAzul;
     private javax.swing.JMenu filtroColor;
     private javax.swing.JMenuItem filtroRojo;
@@ -724,10 +821,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel imagen;
     private javax.swing.JMenuItem inferiorGris;
     private javax.swing.JMenuItem izquierdaGris;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem luzNegra;
     private javax.swing.JMenu mitadGris;
+    private javax.swing.JMenuItem mostrarCodigo;
     private javax.swing.JMenuItem negativo;
+    private javax.swing.JMenuItem ocultarCodigo;
     private javax.swing.JMenuItem pixelear;
     private javax.swing.JMenu reflejo;
     private javax.swing.JMenuItem reflejoDiagonal;
