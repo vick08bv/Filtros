@@ -3,7 +3,6 @@ package Filtros;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.util.Collections;
 
 /**
  * Métodos para cada filtro.
@@ -52,12 +51,14 @@ public class Filtros {
     }
     
     /**
-     * Aplica el filtro tonos de gris en la mitad de una imagen.
+     * Aplica el filtro tonos de gris en cierta parte de una imagen.
      * @param imagen La imagen a la que le aplicaremos el filtro.
-     * @param opcion Mitad en que aplicará el filtro.
+     * @param opcion Parte en que aplicará el filtro.
+     * @param porcentaje Porcentaje de aplicación del filtro.
      * @return La nueva imagen con el filtro aplicado.
      */
-    public BufferedImage tonosDeGrisMitad(BufferedImage imagen, String opcion){
+    public BufferedImage tonosDeGrisParcial(BufferedImage imagen, 
+                                   String opcion, int porcentaje){
         
         BufferedImage nueva = new BufferedImage(
             imagen.getWidth(),imagen.getHeight(), 
@@ -80,7 +81,7 @@ public class Filtros {
             case "sup":
                 
                 sup = 0;
-                inf = (int)(imagen.getHeight()/2);
+                inf = (int)((porcentaje*imagen.getHeight())/100);
                 izq = 0;
                 der = imagen.getWidth();
                 
@@ -88,7 +89,7 @@ public class Filtros {
                 
             case "inf":
             
-                sup = (int)(imagen.getHeight()/2);
+                sup = (int)(((100 - porcentaje)*imagen.getHeight())/100);
                 inf = imagen.getHeight();
                 izq = 0;
                 der = imagen.getWidth();
@@ -100,7 +101,7 @@ public class Filtros {
                 sup = 0;
                 inf = imagen.getHeight();
                 izq = 0;
-                der = (int)(imagen.getWidth()/2);
+                der = (int)((porcentaje*imagen.getWidth())/100);
                 
                 break;
                 
@@ -108,7 +109,7 @@ public class Filtros {
                 
                 sup = 0;
                 inf = imagen.getHeight();
-                izq = (int)(imagen.getWidth()/2);
+                izq = (int)(((100 - porcentaje)*imagen.getWidth())/100);
                 der = imagen.getWidth();
                 
                 break;
@@ -206,9 +207,10 @@ public class Filtros {
     /**
      * Aumento de brillo a una imagen.
      * @param imagen La imagen a la que se le aumentará el brillo.
+     * @param valor Porcentaje de aumento de brillo.
      * @return La nueva imagen más brillante.
      */
-    public BufferedImage aumentarBrillo(BufferedImage imagen){
+    public BufferedImage aumentarBrillo(BufferedImage imagen, int valor){
 
         BufferedImage nueva = new BufferedImage(
                 imagen.getWidth(),imagen.getHeight(), 
@@ -228,24 +230,14 @@ public class Filtros {
                 g = rgb.getGreen();
                 b = rgb.getBlue();
                 
-                if(r < 246){
-                    r += 10;
-                } else {
-                    r = 255;
-                }
+                r = (int)(r*(100 + valor)/100);
+                g = (int)(g*(100 + valor)/100);
+                b = (int)(b*(100 + valor)/100);
                 
-                if(g < 246){
-                    g += 10;
-                } else {
-                    g = 255;
-                }
+                if(r > 255){r = 255;}
+                if(g > 255){g = 255;}
+                if(b > 255){b = 255;}
                 
-                if(b < 246){
-                    b += 10;
-                } else {
-                    b = 255;
-                }
-
                 Color c = new Color(r, g, b, a);
 
                 nueva.setRGB(x, y, c.getRGB());
@@ -260,9 +252,10 @@ public class Filtros {
     /**
      * Reducción de brillo a una imagen.
      * @param imagen La imagen a la que se le disminuirá el brillo.
+     * @param valor Porcentaje de reducción de brillo.
      * @return La nueva imagen menos brillante.
      */
-    public BufferedImage disminuirBrillo(BufferedImage imagen){
+    public BufferedImage disminuirBrillo(BufferedImage imagen, int valor){
 
         BufferedImage nueva = new BufferedImage(
                 imagen.getWidth(),imagen.getHeight(), 
@@ -282,23 +275,9 @@ public class Filtros {
                 g = rgb.getGreen();
                 b = rgb.getBlue();
                 
-                if(r > 9){
-                    r -= 10;
-                } else {
-                    r = 0;
-                }
-                
-                if(g > 9){
-                    g -= 10;
-                } else {
-                    g = 0;
-                }
-                
-                if(b > 9){
-                    b -= 10;
-                } else {
-                    b = 0;
-                }
+                r = (int)(r*(100 - valor)/100);
+                g = (int)(g*(100 - valor)/100);
+                b = (int)(b*(100 - valor)/100);
 
                 Color c = new Color(r, g, b, a);
 
@@ -524,6 +503,21 @@ public class Filtros {
           que se tornaran en un solo color.*/
         int tamanoVertical = (int)((porcentaje*imagen.getHeight())/100);
         int tamanoHorizontal = (int)((porcentaje*imagen.getWidth())/100);
+        
+        if((tamanoVertical == 0) || (tamanoHorizontal == 0)){
+        
+            //Coloreado de la imagen original.
+            for(int y = 0; y < imagen.getHeight(); y++){
+                for(int x = 0; x < imagen.getWidth(); x++){
+
+                    nueva.setRGB(x, y, imagen.getRGB(x, y));
+                
+                }
+            }
+            
+            return nueva;
+        
+        }
         
         Color rgb;
 
