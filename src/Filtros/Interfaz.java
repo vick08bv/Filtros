@@ -776,7 +776,7 @@ public class Interfaz extends javax.swing.JFrame {
         String codigo = JOptionPane.showInputDialog(null, null , 
                 "Introducir Código", JOptionPane.PLAIN_MESSAGE);
         
-        if("".equals(codigo)){return;}
+        if(codigo == null || codigo.equals("")){return;}
         
         imagenActual = filtro.ocultarCodigo(imagenes.get(indice), codigo);
                 
