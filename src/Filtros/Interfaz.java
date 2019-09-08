@@ -512,6 +512,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_grisesTodoActionPerformed
     private void pixelearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pixelearActionPerformed
 
+        //Pixelea la imagen en un porcentaje indicado por el dezlizador.
         imagenActual = filtro.pixelearImagen(
             imagenes.get(indice), deslizador.getValue());
 
@@ -623,6 +624,9 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarActionPerformed
     private void superiorGrisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_superiorGrisActionPerformed
         
+        /*Aplica un filtro gris parcial en la parte superior 
+          de la imagen, tanto como se indique manualmente con
+          el jslider*/
         imagenActual = filtro.tonosDeGrisParcial(imagenes.get(indice),
                                         "sup", deslizador.getValue());
                     
@@ -675,7 +679,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_derechaGrisActionPerformed
     private void aumentarBrilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarBrilloActionPerformed
         
-        //Aumento de brillo.
+        //Aumento de brillo, en un porcentaje que indica el jslider.
         imagenActual = filtro.cambiarBrillo(imagenes.get(indice), 
                                            deslizador.getValue());
                 
