@@ -502,7 +502,8 @@ public class Interfaz extends javax.swing.JFrame {
         imagenActual = filtro.tonosDeGris(imagenes.get(indice));
         // Aumentamos los indices.
         indice++;
-        // Agregamos la nueva imagen a la lista.
+        /* Agregamos la nueva imagen a la lista en la posición 
+           que sigue a la de la imagen de la cual se obtuvo la nueva.*/
         imagenes.add(indice, imagenActual);
         // Colocamos la imagen en la interfaz.
         imagen.setIcon(new ImageIcon(imagenActual.getScaledInstance(
@@ -561,6 +562,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_filtroAzulActionPerformed
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
    
+        //Se dirige a la imagen anterior en la lista.
+        
         if(indice > 0){
         
             indice--;
@@ -572,6 +575,8 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_anteriorActionPerformed
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+        
+        //Se dirige a la siguiente imagen en la lista.
         
         if(indice < imagenes.size()-1){
 
@@ -585,8 +590,12 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_siguienteActionPerformed
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         
+        //Elimina la imagen actual en la lista.
         if(imagenes.size() == 1){
 
+            /*Se desactivan algunos botones al momento 
+              de que la lista vaya a quedar vacía.*/
+                    
             guardar.setEnabled(false);
             filtros.setEnabled(false);
             anterior.setEnabled(false);
@@ -597,14 +606,17 @@ public class Interfaz extends javax.swing.JFrame {
         
         } else {
         
-                imagenes.remove(indice);
+            /*Si la lista tiene varias imágenes, se elimina la actual
+              y se muestra en la ventana la imagen anterior.*/
+            
+            imagenes.remove(indice);
                 
-                if(indice == imagenes.size()){
-                    indice--;
-                }
+            if(indice == imagenes.size()){
+                indice--;
+            }
                 
-                imagen.setIcon(new ImageIcon(imagenes.get(indice).getScaledInstance(
-                          imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
+            imagen.setIcon(new ImageIcon(imagenes.get(indice).getScaledInstance(
+                      imagen.getWidth(), -1, Image.SCALE_SMOOTH)));
             
         }
         
@@ -663,7 +675,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_derechaGrisActionPerformed
     private void aumentarBrilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aumentarBrilloActionPerformed
         
-        imagenActual = filtro.aumentarBrillo(imagenes.get(indice), 
+        //Aumento de brillo.
+        imagenActual = filtro.cambiarBrillo(imagenes.get(indice), 
                                            deslizador.getValue());
                 
         indice++;
@@ -748,14 +761,18 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_luzNegraActionPerformed
     private void mostrarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCodigoActionPerformed
         
+        //Se busca algún mensaje oculto en la imagen actual.
         String cadena = filtro.mostrarCodigo(imagenes.get(indice));
         
+        //Se muestra el mensaje obtenido.
         JOptionPane.showMessageDialog(null, cadena, "Código", 
                                   JOptionPane.PLAIN_MESSAGE);
         
     }//GEN-LAST:event_mostrarCodigoActionPerformed
     private void ocultarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocultarCodigoActionPerformed
         
+        /*Ventana y variable donde se introducirá y guardara el mensaje 
+          a ocultar en la imagen.*/
         String codigo = JOptionPane.showInputDialog(null, null , 
                 "Introducir Código", JOptionPane.PLAIN_MESSAGE);
                 
@@ -771,8 +788,9 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_ocultarCodigoActionPerformed
     private void disminuirBrilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disminuirBrilloActionPerformed
         
-        imagenActual = filtro.disminuirBrillo(imagenes.get(indice), 
-                                            deslizador.getValue());
+        //Cambio de brillo indicando disminución.
+        imagenActual = filtro.cambiarBrillo(imagenes.get(indice), 
+                                     (-1)*deslizador.getValue());
 
         indice++;
 

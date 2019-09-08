@@ -120,7 +120,7 @@ public class Filtros {
         
         int a, r, g, b;
 
-        //Coloreado de gris en la parte deseada de la imagen.
+        //Coloreado de gris sólo en la parte deseada de la imagen.
         for(int y = sup; y < inf; y++){
             for(int x = izq; x < der; x++){
 
@@ -186,6 +186,7 @@ public class Filtros {
                 
                 return nueva;
                 
+            //Filtro azul.
             default:
                 
                 for(int y = 0; y < imagen.getHeight(); y++){
@@ -205,12 +206,12 @@ public class Filtros {
     }
     
     /**
-     * Aumento de brillo a una imagen.
-     * @param imagen La imagen a la que se le aumentará el brillo.
-     * @param valor Porcentaje de aumento de brillo.
-     * @return La nueva imagen más brillante.
+     * Cambia el brillo de una imagen.
+     * @param imagen La imagen a la que se le cambiará el brillo.
+     * @param valor Porcentaje de cambio del brillo.
+     * @return La nueva imagen con un cambio en el brillo.
      */
-    public BufferedImage aumentarBrillo(BufferedImage imagen, int valor){
+    public BufferedImage cambiarBrillo(BufferedImage imagen, int valor){
 
         BufferedImage nueva = new BufferedImage(
                 imagen.getWidth(),imagen.getHeight(), 
@@ -229,6 +230,11 @@ public class Filtros {
                 r = rgb.getRed();
                 g = rgb.getGreen();
                 b = rgb.getBlue();
+                
+                /*El porcentaje de cambio de brillo se aplica 
+                  sobre los valores de la imagen original.
+                  Si el valor es positivo, se aumenta el brillo,
+                  si es negativo, se reduce.*/
                 
                 r = (int)(r*(100 + valor)/100);
                 g = (int)(g*(100 + valor)/100);
@@ -238,47 +244,6 @@ public class Filtros {
                 if(g > 255){g = 255;}
                 if(b > 255){b = 255;}
                 
-                Color c = new Color(r, g, b, a);
-
-                nueva.setRGB(x, y, c.getRGB());
-                
-            }
-        }
-        
-        return nueva;
-        
-    }
-    
-    /**
-     * Reducción de brillo a una imagen.
-     * @param imagen La imagen a la que se le disminuirá el brillo.
-     * @param valor Porcentaje de reducción de brillo.
-     * @return La nueva imagen menos brillante.
-     */
-    public BufferedImage disminuirBrillo(BufferedImage imagen, int valor){
-
-        BufferedImage nueva = new BufferedImage(
-                imagen.getWidth(),imagen.getHeight(), 
-                BufferedImage.TYPE_INT_RGB);
-        
-        Color rgb;
-
-        int a, r, g, b;
-
-        for(int y = 0; y < imagen.getHeight(); y++){
-            for(int x = 0; x < imagen.getWidth(); x++){
-
-                rgb = new Color(imagen.getRGB(x, y));
-
-                a = rgb.getAlpha();
-                r = rgb.getRed();
-                g = rgb.getGreen();
-                b = rgb.getBlue();
-                
-                r = (int)(r*(100 - valor)/100);
-                g = (int)(g*(100 - valor)/100);
-                b = (int)(b*(100 - valor)/100);
-
                 Color c = new Color(r, g, b, a);
 
                 nueva.setRGB(x, y, c.getRGB());
@@ -371,6 +336,8 @@ public class Filtros {
                 
                 return nueva;
                 
+            /*El reflejo diagonal no es más que uno horizontal 
+              seguido de uno vertical (o viceversa)*/
             default:
                 
                 for(int y = 0; y < height; y++){
@@ -495,15 +462,22 @@ public class Filtros {
      */
     public BufferedImage pixelearImagen(BufferedImage imagen, int porcentaje){
 
+        /*Se define el porcentaje de pixeleado como el inverso de
+          los "pixeles" por lado que tendrá la nueva imagen.
+          (Regiones con el mismo color)*/
+        
         BufferedImage nueva = new BufferedImage(
                 imagen.getWidth(),imagen.getHeight(), 
                 BufferedImage.TYPE_INT_RGB);
         
-        /*Cálculo del tamaño de las cuadrículas 
+        /*Cálculo del tamaño de las regiones 
           que se tornaran en un solo color.*/
         int tamanoVertical = (int)((porcentaje*imagen.getHeight())/100);
         int tamanoHorizontal = (int)((porcentaje*imagen.getWidth())/100);
         
+        /*Si el porcentaje es cero o muy pequeño y los tamaños de las
+          regiones se vuelven nulos, no se aplica filtro alguno y sólo
+          se copia la imagen.*/
         if((tamanoVertical == 0) || (tamanoHorizontal == 0)){
         
             //Coloreado de la imagen original.
@@ -523,11 +497,12 @@ public class Filtros {
 
         //Colores del pixel actual.
         int a, r, g, b;
-        //Colores acumulados por todas los pixeles de la cuadrícula.
+        //Colores acumulados por todas los pixeles de la región.
         int aT, rT, gT, bT;
-        //Cantidad de pixeles en cada cuadrícula. 
+        //Cantidad de pixeles en cada región. 
         int pixeles;
         
+        //Iteración a través de cada región.
         for(int y = 0; y < imagen.getHeight(); y += tamanoVertical){
             for(int x = 0; x < imagen.getWidth(); x += tamanoHorizontal){
                 
@@ -679,6 +654,15 @@ public class Filtros {
                 if(posiciones.contains(pixel)){
                     
                     //Modificación de los pixeles guía.
+                    
+                    /*El método usado para marcar los pixeles es, 
+                      alterar el pixel elegido aletoriamente, el 
+                      de la derecha y el de "abajo" (x, y+1), para ser 
+                      leídos con los dígitos en que terminan sus compo-
+                      nentes de cada color, para luego
+                      insertar el código en el pixel con las coordenadas
+                      (x+1, y+1).*/
+                    
                     rgb = new Color(imagen.getRGB(x, y));
                     
                     r = rgb.getRed();
@@ -769,6 +753,9 @@ public class Filtros {
         
         int pixel = 0;
 
+        /*Búsqueda en la imagen de pixeles marcados para poder 
+          extraer la información.*/
+        
         for(int y = 0; y < imagen.getHeight(); y++){
             for(int x = 0; x < imagen.getWidth(); x++){
 
@@ -779,6 +766,8 @@ public class Filtros {
                     r = rgb.getRed();
                     g = rgb.getGreen();
                     b = rgb.getBlue();
+                    
+                    //Reunión del mensaje.
                     
                     cadena += String.format("%s%s%s",(char)(r), 
                                           (char)(g), (char)(b));
@@ -814,15 +803,16 @@ public class Filtros {
         
         int a, r, g, b;
         
-        /*Si el pixel actual, el de arriba y el de a lado están marcados,
-          es porque el de arriba y a lado tiene un pedazo de código*/
+        /*Si el pixel actual, el de abajo y el de a lado están marcados,
+          es porque el de abajo y a lado tiene un pedazo de código*/
+        
         rgb = new Color(imagen.getRGB(x, y));
 
                 a = rgb.getAlpha();
                 r = rgb.getRed();
                 g = rgb.getGreen();
                 b = rgb.getBlue();
-                
+
                 if(((r % 10) == 3) && ((g % 10) == 4) && 
                     ((b % 10) == 5) && (a == 255)){
                     
